@@ -29,12 +29,12 @@
       $('#video-container').append('<div class="col s4">'
       +'  <div class="">'
       +'    <div class="card">'
-      +'      <div class="card-image center-align">'
-      +'        <iframe width="400" height="auto" src="https://www.youtube.com/v/'+videoSnippet.resourceId.videoId+'" frameborder="0" allowfullscreen></iframe>'
+      +'      <div class="card-image center-align video-container">'
+      +'        <iframe width="470" height="420" src="https://www.youtube.com/v/'+videoSnippet.resourceId.videoId+'" frameborder="0" allowfullscreen></iframe>'
       +'        <span class="card-title">'+title+'</span>'
       +'      </div>'
-      +'      <div class="card-content">'
-      +'        <p>I am convenient because I require little markup to use effectively.</p>'
+      +'      <div class="card-content" onclick=getCommentsById("'+videoSnippet.resourceId.videoId+'")>'
+      +'        <a class"waves-effect waves-light btn modal-trigger" href="#modal1">View Comments</p>'
       +'      </div>'
       +'      <div class="card-action">'
       +'        <a href="#">This is a link</a>'
@@ -56,3 +56,32 @@
  gapi.client.load('youtube', 'v3').then(getPlaylistItems);
 
  }
+
+function getCommentsById(id){
+  var URL="https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyCH87lFHKzVGrtxIDabWViPnR9tjyKhMGc&textFormat=plainText&part=snippet&videoId="+id+"&maxResults=50";
+  $.ajax({
+        type: "GET",
+        url: URL,
+        success: function(data) {
+            //console.log(data);
+            $('#modal1').openModal();
+            var model = $('.comments');
+            model.empty();
+            for (var i in data.items) {
+                var item = data.items[i];
+                model.append(
+                '<ul class="collection">'+
+                  '<li class="collection-item avatar">'+
+                    '<img src="'+item.snippet.topLevelComment.snippet.authorProfileImageUrl+'" alt="" class="circle">'+
+                    '<span class="title">'+item.snippet.topLevelComment.snippet.textDisplay+'</span>'+
+                  '</li>'+
+                '</ul>'
+              );
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+
+}
