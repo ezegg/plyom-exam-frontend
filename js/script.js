@@ -10,7 +10,7 @@
 
  request.execute(function (response) {
    var playlistItems = response.result.items;
-   $('#video-container').empty(); 
+   $('#video-container').empty();
    if (playlistItems) {
      $.each(playlistItems, function (index, item) {
        displayResult(item.snippet, item.id);
@@ -28,7 +28,7 @@
        var thumbnail = videoSnippet.thumbnails.default.url;
        var id = videoId;
        if (flag == 1) {
-         var showbtnPlayList = '        <a class="btn-floating btn-large waves-effect waves-light green" onclick="addVideoToPlaylist('+videoSnippet.resourceId.videoId+')"><i class="material-icons">add</i></a>';
+         var showbtnPlayList = '        <a id="'+videoSnippet.resourceId.videoId+'" class="btn-floating btn-large waves-effect waves-light green" onclick=addToPlaylist("'+videoSnippet.resourceId.videoId+'")><i class="material-icons">add</i></a>';
        } else {
          var showbtnPlayList = '';
        }
@@ -138,12 +138,6 @@ function createPlaylist() {
   init();
 }
 
-
-// Add a video ID specified in the form to the playlist.
-function addVideoToPlaylist() {
-  addToPlaylist($('#video-id').val());
-}
-
 // Add a video to a playlist. The "startPos" and "endPos" values let you
 // start and stop the video at specific times when the video is played as
 // part of the playlist. However, these values are not set in this example.
@@ -169,6 +163,7 @@ function addToPlaylist(id, startPos, endPos) {
   });
   request.execute(function(response) {
     $('#status').html('<pre>' + JSON.stringify(response.result) + '</pre>');
+    $( "#"+id ).removeClass( "green" ).addClass( "blue" );
   });
 }
 
