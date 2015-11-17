@@ -26,10 +26,26 @@
        var title = videoSnippet.title;
        var thumbnail = videoSnippet.thumbnails.default.url;
        var id = videoId;
-       var video =
-       $('#video-container').append('<p><iframe width="560" height="315" src="https://www.youtube.com/v/'+videoSnippet.resourceId.videoId+'" frameborder="0" allowfullscreen></iframe></p>');
-       $('#video-container').append('<p>' + title + '</p>');
-       $('#video-container').append('<p>' + id + '</p>');
+      $('#video-container').append('<div class="col s4">'
+      +'  <div class="">'
+      +'    <div class="card">'
+      +'      <div class="card-image center-align">'
+      +'        <iframe width="400" height="auto" src="https://www.youtube.com/v/'+videoSnippet.resourceId.videoId+'" frameborder="0" allowfullscreen></iframe>'
+      +'        <span class="card-title">'+title+'</span>'
+      +'      </div>'
+      +'      <div class="card-content">'
+      +'        <p>I am convenient because I require little markup to use effectively.</p>'
+      +'      </div>'
+      +'      <div class="card-action">'
+      +'        <a href="#">This is a link</a>'
+      +'      </div>'
+      +'    </div>'
+      +'  </div>'
+      +'</div>');
+
+       //$('#video-container').append('<p><iframe width="560" height="315" src="https://www.youtube.com/v/'+videoSnippet.resourceId.videoId+'" frameborder="0" allowfullscreen></iframe></p>');
+       //$('#video-container').append('<p>' + title + '</p>');
+       //$('#video-container').append('<p>' + id + '</p>');
 
      }
    });
