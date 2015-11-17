@@ -4,16 +4,28 @@
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
  <script src="js/script.js"></script>
- <script src="https://apis.google.com/js/client.js?onload=init"></script>
+ <script src="js/playlist.js"></script>
+ <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
  <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
 </head>
 <body>
   <div class="card-panel teal lighten-2">This project use Youtube API
+    <!--<button onclick="auth();">Authorize</button>
+    <div id="login-container" class="pre-auth">This application requires access to your YouTube account.
+      Please <a href="#" id="login-link">authorize</a> to continue.
+    </div>-->
+    <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons" id="playlist-button" disabled onclick="showCreatePlaylist()">playlist_add</i>
+    </a>
 
+
+  </div>
   </div>
   <div id="video-container" class="row"></div>
 
@@ -26,5 +38,26 @@
       <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat"></a>
     </div>
   </div>
+
+  <!-- Modal Structure -->
+  <div id="modal2" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <div id="buttons">
+          <input placeholder="Title" id="title" type="text" class="validate">
+          <label for="first_name">Title</label>
+          <input placeholder="Description" id="description" type="text" class="validate">
+          <label for="first_name">Description</label>
+          <br>
+          <button id="playlist-button" onclick="createPlaylist()" class="btn modal-action modal-close waves-effect waves-green btn-flat ">Create a new Private Playlist</button>
+
+          <!--<label>Current Playlist Id: <input id="playlist-id" value='' type="text"/></label>
+          <br>
+          <label>Video Id: <input id="video-id" value='GZG9G5txtaE' type="text"/></label><button onclick="addVideoToPlaylist()">Add to current playlist</button>-->
+      </div>
+
+      <label>Video Id: <input id="video-id" value='GZG9G5txtaE' type="text"/></label><button onclick="addVideoToPlaylist()">Add to current playlist</button>
+    </div>
+  </div>
+
 </body>
 </html>
